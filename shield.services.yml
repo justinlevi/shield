@@ -1,0 +1,7 @@
+services:
+  shield.default:
+    class: Drupal\shield\EventSubscriber\ShieldEventSubscriber
+    arguments: []
+    tags:
+      - { name: event_subscriber }
+
