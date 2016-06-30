@@ -1,0 +1,7 @@
+shield.form:
+  path: '/admin/config/shield'
+  defaults:
+    _form: 'Drupal\shield\Form\ShieldForm'
+    _title: 'Shield settings'
+  requirements:
+    _permission: 'administer site configuration'
