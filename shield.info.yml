@@ -1,0 +1,5 @@
+name: shield
+type: module
+description: Creates a general shield for the site
+core: 8.x
+package: Custom
