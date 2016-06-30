@@ -1,0 +1,19 @@
+shield.settings:
+  type: mapping
+  label: 'Shield settings'
+  mapping:
+    shield:
+      type: mapping
+      mapping:
+        allow_cli:
+          type: text
+          label: 'Allow command line access:'
+        user:
+          type: text
+          label: 'User:'
+        pass:
+          type: text
+          label: 'Password:'
+        print:
+          type: text
+          label: 'Authentication message:'
