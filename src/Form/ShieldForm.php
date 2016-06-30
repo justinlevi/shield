@@ -42,7 +42,7 @@ class ShieldForm extends ConfigFormBase {
             '#type' => 'checkbox',
             '#title' => t('Allow command line access'),
             '#description' => t('When the site is accessed from command line (e.g. from Drush, cron), the shield should not work.'),
-            '#default_value' => $config->get('shield.allow_cli', 1),
+            '#default_value' => $config->get('shield.allow_cli'),
         );
 
         $form['credentials'] = array(
@@ -53,14 +53,14 @@ class ShieldForm extends ConfigFormBase {
         $form['credentials']['shield_user'] = array(
             '#type' => 'textfield',
             '#title' => t('User'),
-            '#default_value' => $config->get('shield.user', ''),
+            '#default_value' => $config->get('shield.user'),
             '#description' => t('Live it blank to disable authentication.')
         );
 
         $form['credentials']['shield_pass'] = array(
             '#type' => 'textfield',
             '#title' => t('Password'),
-            '#default_value' => $config->get('shield.pass', ''),
+            '#default_value' => $config->get('shield.pass'),
         );
 
         $form['shield_print'] = array(
@@ -87,10 +87,10 @@ class ShieldForm extends ConfigFormBase {
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
         $config = $this->config('shield.settings');
-        $config->set('shield.allow_cli', $form_state->getValue('allow_cli'));
-        $config->set('shield.user', $form_state->getValue('user'));
-        $config->set('shield.pass', $form_state->getValue('pass'));
-        $config->set('shield.print', $form_state->getValue('print'));
+        $config->set('shield.allow_cli', $form_state->getValue('shield_allow_cli'));
+        $config->set('shield.user', $form_state->getValue('shield_user'));
+        $config->set('shield.pass', $form_state->getValue('shield_pass'));
+        $config->set('shield.print', $form_state->getValue('shield_print'));
         $config->save();
         return parent::submitForm($form, $form_state);
     }
