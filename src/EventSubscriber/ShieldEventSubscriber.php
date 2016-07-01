@@ -42,6 +42,9 @@ class ShieldEventSubscriber implements EventSubscriberInterface
     {
         $config = \Drupal::config('shield.settings');
         $user = $config->get('shield.user');
+        $pass = $config->get('shield.pass');
+        $print = $config->get('shield.print');
+
         if (!$user) {
             \Drupal::logger('shield')->notice('Event kernel.response no user set.');
             return;
@@ -59,7 +62,6 @@ class ShieldEventSubscriber implements EventSubscriberInterface
             base64_decode(substr($_SERVER['REDIRECT_HTTP_AUTHORIZATION'], 6))
         );
 
-        $pass = $config->get('shield.pass');
         if (!empty($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])
             && $_SERVER['PHP_AUTH_USER'] == $user
             && $_SERVER['PHP_AUTH_PW']   == $pass) {
@@ -67,9 +69,8 @@ class ShieldEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $print = $config->get('shield.print');
-
-        header(sprintf('WWW-Authenticate: Basic realm="%s"', strtr($print, array('[user]' => $user, '[pass]' => $pass))));
+        //header(sprintf('WWW-Authenticate: Basic realm="%s"', strtr($print, array('[user]' => $user, '[pass]' => $pass))));
+        header('WWW-Authenticate: Basic realm="%s"');
         header('HTTP/1.0 401 Unauthorized');
         exit();
     }
