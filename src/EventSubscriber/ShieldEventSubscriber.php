@@ -74,7 +74,7 @@ class ShieldEventSubscriber implements EventSubscriberInterface
         }
 
         //header(sprintf('WWW-Authenticate: Basic realm="%s"', strtr($print, array('[user]' => $user, '[pass]' => $pass))));
-        header('WWW-Authenticate: Basic realm="$sitename"');
+        header('WWW-Authenticate: Basic realm="' . $sitename . '"');
         header('HTTP/1.0 401 Unauthorized');
         exit();
     }
