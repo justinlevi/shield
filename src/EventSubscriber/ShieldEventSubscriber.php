@@ -60,11 +60,9 @@ class ShieldEventSubscriber implements EventSubscriberInterface
         }
 
         $print = $config->get('shield.print');
+
         header(sprintf('WWW-Authenticate: Basic realm="%s"', strtr($print, array('[user]' => $user, '[pass]' => $pass))));
         header('HTTP/1.0 401 Unauthorized');
-        exit;
-        //drupal_set_message('Event kernel.response thrown by Subscriber in module shield.', 'status', true);
-
-
+        exit();
     }
 }
