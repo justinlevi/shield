@@ -51,6 +51,14 @@ class ShieldEventSubscriber implements EventSubscriberInterface
          * @todo allow drush to bypass
          */
 
+        /*
+         * Pull out username and password from encrypted server variable
+         */
+        list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) = explode(
+            ':',
+            base64_decode(substr($_SERVER['REDIRECT_HTTP_AUTHORIZATION'], 6))
+        );
+
         $pass = $config->get('shield.pass');
         if (!empty($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])
             && $_SERVER['PHP_AUTH_USER'] == $user
